@@ -1,0 +1,399 @@
+<mxfile host="65bd71144e">
+    <diagram id="ovgiz1bio9mlFmf7xyfo" name="Page-1">
+        <mxGraphModel dx="1536" dy="1039" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="&lt;h1&gt;API Diagram&lt;/h1&gt;&lt;p&gt;This diagram is intended to show the design of the library, working backwards from the requirements imposed by the POSIX spec / by the SCTP RFCs.&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry y="10" width="280" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="Unsupported POSIX functions" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry y="120" width="280" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="socketpair(domain, type, pair) - Out of scope, only useful for UNIX domain sockets" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="3" vertex="1">
+                    <mxGeometry y="20" width="280" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="sockatmark(sock) - SCTP does not provide out-of-band data; use streams instead." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="3" vertex="1">
+                    <mxGeometry y="60" width="280" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="Unsupported SCTP Sockets API functions" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="280" y="120" width="280" height="100" as="geometry">
+                        <mxRectangle y="240" width="260" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="16" value="sctp_sendmsg() - Deprecated by RFC 6458" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="15" vertex="1">
+                    <mxGeometry y="20" width="280" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="sctp_recvmsg() - Deprecated by RFC 6458" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="15" vertex="1">
+                    <mxGeometry y="40" width="280" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="sctp_send() - Deprecated by RFC 6458" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="15" vertex="1">
+                    <mxGeometry y="60" width="280" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="sctp_sendx() - Deprecated by RFC 6458" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="15" vertex="1">
+                    <mxGeometry y="80" width="280" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="37" value="Stack" style="swimlane;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry y="240" width="1680" height="1720" as="geometry">
+                        <mxRectangle y="360" width="70" height="20" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="20" value="socket(domain, type) SocketError!socket_t" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="37" vertex="1">
+                    <mxGeometry x="360" y="40" width="320" height="200" as="geometry">
+                        <mxRectangle x="360" y="40" width="250" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="21" value="domain - AF_INET or AF_INET6" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="20" vertex="1">
+                    <mxGeometry y="20" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="type - SOCK_STREAM or SOCK_SEQPACKET" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="20" vertex="1">
+                    <mxGeometry y="40" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="(implicit) protocol - always IPPROTO_SCTP" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="20" vertex="1">
+                    <mxGeometry y="60" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="30" value="socket_t - An unsigned, 32-bit integer identifying a Socket" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="20" vertex="1">
+                    <mxGeometry y="80" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="Creating a socket in SOCK_SEQPACKET mode makes it a 'one-to-many' socket; in SOCK_STREAM mode, a 'one-to-one' (like TCP)." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="20" vertex="1">
+                    <mxGeometry y="100" width="320" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="81" value="socketAlloc(allocator, domain, type) SocketError || AllocError!socket_t" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="20" vertex="1">
+                    <mxGeometry y="150" width="320" height="50" as="geometry">
+                        <mxRectangle y="150" width="320" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="118" value="allocator - The allocator for the Stack to use (if needed)." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="81" vertex="1">
+                    <mxGeometry y="30" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="85" value="AllocError" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="37" vertex="1">
+                    <mxGeometry y="160" width="320" height="50" as="geometry">
+                        <mxRectangle y="350" width="90" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="86" value="ENOMEM - The allocator cannot provide further resources." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="85" vertex="1">
+                    <mxGeometry y="20" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="SocketError" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="37" vertex="1">
+                    <mxGeometry y="40" width="320" height="100" as="geometry">
+                        <mxRectangle y="160" width="320" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="27" value="EAFNOSUPPORT - The domain is not supported." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="26" vertex="1">
+                    <mxGeometry y="20" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="29" value="EPROTOTYPE - The socket type is not supported." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="26" vertex="1">
+                    <mxGeometry y="40" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" value="EMFILE - The Stack cannot provide more sockets." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="26" vertex="1">
+                    <mxGeometry y="60" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="ENOBUFS - The Stack cannot provide more buffer space." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="26" vertex="1">
+                    <mxGeometry y="80" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="97" value="Socket" style="swimlane;whiteSpace=wrap;html=1;" parent="37" vertex="1">
+                    <mxGeometry y="280" width="1040" height="1440" as="geometry">
+                        <mxRectangle y="240" width="80" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="93" value="bind(addr) BindError!void" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="97" vertex="1">
+                    <mxGeometry x="360" y="40" width="320" height="380" as="geometry">
+                        <mxRectangle x="360" y="40" width="170" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="94" value="addr - A pointer to an IPv4 or IPv6 structure." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="93" vertex="1">
+                    <mxGeometry y="20" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="95" value="bind() cannot associate multiple addresses to a socket; use sctp_bindx() instead." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="93" vertex="1">
+                    <mxGeometry y="40" width="320" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="98" value="A bound socket rejects INIT packets until a listen() call is made" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="93" vertex="1">
+                    <mxGeometry y="80" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="158" value="bindAlloc(allocator, addr) BindError || AllocError!void" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="93" vertex="1">
+                    <mxGeometry y="110" width="320" height="40" as="geometry">
+                        <mxRectangle y="110" width="320" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="162" value="allocator - The allocator for the Stack to use (if needed)." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="158" vertex="1">
+                    <mxGeometry y="20" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="112" value="sctp_bindx(addrs, flags) BindError || BindxError!void" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="93" vertex="1">
+                    <mxGeometry y="150" width="320" height="230" as="geometry">
+                        <mxRectangle x="360" y="160" width="320" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="113" value="addrs - An array of IPv4/IPv6 addresses." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="112" vertex="1">
+                    <mxGeometry y="20" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="115" value="flags - SCTP_BINDX_ADD_ADDR or SCTP_BINDX_REM_ADDR (add/remove addresses)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="112" vertex="1">
+                    <mxGeometry y="40" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="116" value="Unlike bind(), sctp_bindx() can be called repeatedly to bind or remove additional addresses." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="112" vertex="1">
+                    <mxGeometry y="70" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="117" value="All addresses must have the same port as the first / already bound address[es], or be 0 (to select an ephemeral port)." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="112" vertex="1">
+                    <mxGeometry y="100" width="320" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="170" value="sctp_bindx() is atomic, and will succeed or fail for all addresses." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="112" vertex="1">
+                    <mxGeometry y="150" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="163" value="sctp_bindxAlloc(allocator, addrs, len, flags) BindxError || AllocError!void" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="112" vertex="1">
+                    <mxGeometry y="180" width="320" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="164" value="allocator - The allocator for the Stack to use (if needed)." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="163" vertex="1">
+                    <mxGeometry y="30" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="99" value="BindError" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="97" vertex="1">
+                    <mxGeometry y="40" width="320" height="340" as="geometry">
+                        <mxRectangle y="40" width="90" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="100" value="EADDRINUSE - The specified address is already in use." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="99" vertex="1">
+                    <mxGeometry y="20" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="101" value="EADDRNOTAVAIL - The specified address is not available from the local machine." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="99" vertex="1">
+                    <mxGeometry y="40" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="102" value="EAFNOSUPPORT - The specified address is not of a valid type for this socket." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="99" vertex="1">
+                    <mxGeometry y="70" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="104" value="EINPROGRESS - O_NONBLOCK is set for the socket; the assignment will be performed asynchronously." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="99" vertex="1">
+                    <mxGeometry y="100" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="106" value="EALREADY - An assignment request is already in progress for the specified socket." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="99" vertex="1">
+                    <mxGeometry y="130" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="107" value="EINVAL - The socket is already bound, or has been shut down." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="99" vertex="1">
+                    <mxGeometry y="160" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="108" value="ENOBUFS - The Stack lacks the resources to bind a new address or port." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="99" vertex="1">
+                    <mxGeometry y="190" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="111" value="EACCES - The Stack does not have permission to bind the specified address." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="99" vertex="1">
+                    <mxGeometry y="220" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="109" value="ENOTSOCK - The socket provided is invalid." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="99" vertex="1">
+                    <mxGeometry y="250" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="119" value="BindxError" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="99" vertex="1">
+                    <mxGeometry y="270" width="320" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="120" value="EINVAL - Invalid flag setting (0 or both flags set)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="119" vertex="1">
+                    <mxGeometry y="20" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="121" value="EOPNOTSUPP (Optional) - Our implementation doesn't support editing an established socket's address" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="119" vertex="1">
+                    <mxGeometry y="40" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="123" value="listen(backlog) ListenError!void" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="97" vertex="1">
+                    <mxGeometry x="360" y="440" width="320" height="230" as="geometry">
+                        <mxRectangle x="360" y="360" width="210" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="124" value="backlog - Hints to the Stack how many outstanding connections can sit in the socket's listen queue. Support up to SOMAXCONN as backlog values." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="123" vertex="1">
+                    <mxGeometry y="20" width="320" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="126" value="A listening one-to-many socket accepts new associations automatically, delivering an SCTP_ASSOC_CHANGE event through recvmsg()." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="123" vertex="1">
+                    <mxGeometry y="70" width="320" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="128" value="An outstanding association is considered to have finished the four-way initiation handshake and is waiting in the ESTABLISHED state." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="123" vertex="1">
+                    <mxGeometry y="120" width="320" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="129" value="A backlog of 0 stops listening." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="123" vertex="1">
+                    <mxGeometry y="170" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="135" value="listenAlloc(allocator, backlog) ListenError || AllocError!void" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="123" vertex="1">
+                    <mxGeometry y="190" width="320" height="40" as="geometry">
+                        <mxRectangle y="200" width="320" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="136" value="allocator - The allocator for the Stack to use (if needed)." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="135" vertex="1">
+                    <mxGeometry y="20" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="130" value="ListenError" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="97" vertex="1">
+                    <mxGeometry y="400" width="320" height="120" as="geometry">
+                        <mxRectangle y="400" width="90" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="131" value="EDESTADDRREQ - The socket is unbound." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="130" vertex="1">
+                    <mxGeometry y="20" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="132" value="EINVAL - The socket is not in the proper state to call listen() (connected, or shut down)." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="130" vertex="1">
+                    <mxGeometry y="40" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="133" value="ENOTSOCK - The socket provided is invalid." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="130" vertex="1">
+                    <mxGeometry y="70" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="134" value="ENOBUFS - The Stack lacks the resources to complete the call." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="130" vertex="1">
+                    <mxGeometry y="90" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="137" value="accept(addr) AcceptError!socket_t" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="97" vertex="1">
+                    <mxGeometry x="720" y="40" width="320" height="130" as="geometry">
+                        <mxRectangle x="720" y="40" width="220" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="138" value="addr - Either null, or a pointer to a sockaddr to hold the address of the new connection." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="137" vertex="1">
+                    <mxGeometry y="20" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="139" value="Accepted sockets cannot accept more connections; the original remains open, however." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="137" vertex="1">
+                    <mxGeometry y="50" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="141" value="acceptAlloc(allocator, addr) AcceptError || AllocError!socket_t" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="137" vertex="1">
+                    <mxGeometry y="80" width="320" height="50" as="geometry">
+                        <mxRectangle y="80" width="320" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="142" value="allocator - The allocator for the Stack to use (if needed)." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="141" vertex="1">
+                    <mxGeometry y="30" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="145" value="AcceptError" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="97" vertex="1">
+                    <mxGeometry y="560" width="320" height="220" as="geometry"/>
+                </mxCell>
+                <mxCell id="146" value="EOPNOTSUPP - Attempting to accept() a connection on a one-to-many socket." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="145" vertex="1">
+                    <mxGeometry y="20" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="147" value="EAGAIN/EWOULDBLOCK - O_NONBLOCK is set and no connections are present." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="145" vertex="1">
+                    <mxGeometry y="50" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="148" value="ENOTSOCK - Not a valid socket." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="145" vertex="1">
+                    <mxGeometry y="80" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="149" value="ECONNABORTED - A connection was aborted." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="145" vertex="1">
+                    <mxGeometry y="100" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="150" value="EINTR - The accept() function was interrupted by a signal that was caught before a valid connection arrived." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="145" vertex="1">
+                    <mxGeometry y="120" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="151" value="EINVAL - The socket is not bound." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="145" vertex="1">
+                    <mxGeometry y="150" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="152" value="EMFILE - The Stack cannot provide more sockets." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="145" vertex="1">
+                    <mxGeometry y="170" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="153" value="ENOBUFS - The Stack lacks the resources to accept the connection." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="145" vertex="1">
+                    <mxGeometry y="190" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="154" value="connect(addr) ConnectError!void" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="97" vertex="1">
+                    <mxGeometry x="720" y="480" width="320" height="380" as="geometry"/>
+                </mxCell>
+                <mxCell id="155" value="addr - A pointer to a sockaddr structure." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="154" vertex="1">
+                    <mxGeometry y="20" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="156" value="connect() is not explicitly required for a client; sendmsg() or sendto() also set up an implicit association, with data transfer during the COOKIE ECHO phase" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="154" vertex="1">
+                    <mxGeometry y="40" width="320" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="157" value="using connect() on an unbound socket causes it to bind to the wildcard address, on an ephemeral port" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="154" vertex="1">
+                    <mxGeometry y="90" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="165" value="A socket that failed to connect() is left in an unspecified state; apps &lt;i style=&quot;font-weight: bold;&quot;&gt;should &lt;/i&gt;close the socket and create a new one before attempting to reconnect." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="154" vertex="1">
+                    <mxGeometry y="120" width="320" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="187" value="connectAlloc(allocator, addr) ConnectError || AllocError!void" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="154" vertex="1">
+                    <mxGeometry y="170" width="320" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="188" value="allocator - The allocator for the Stack to use (if needed)." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="187" vertex="1">
+                    <mxGeometry y="20" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="166" value="sctp_connectx(addrs, id) ConnectError!void" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="154" vertex="1">
+                    <mxGeometry y="210" width="320" height="170" as="geometry"/>
+                </mxCell>
+                <mxCell id="167" value="addrs - A pointer to an array of addresses &lt;b&gt;for one peer&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="166" vertex="1">
+                    <mxGeometry y="20" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="168" value="id - A pointer to an sctp_assoc_t that, if passed as non-NULL,&amp;nbsp; will return the association identifier if successful" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="166" vertex="1">
+                    <mxGeometry y="40" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="169" value="How we use the addresses passed is up to our implementation; the spec also says we don't need to keep all of them for the resulting association" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="166" vertex="1">
+                    <mxGeometry y="70" width="320" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="191" value="sctp_connectxAlloc(allocator, addr) ConnectError || AllocError!void" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="166" vertex="1">
+                    <mxGeometry y="120" width="320" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="192" value="allocator - The allocator for the Stack to use (if needed)." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="191" vertex="1">
+                    <mxGeometry y="30" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="171" value="ConnectError" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="97" vertex="1">
+                    <mxGeometry y="960" width="320" height="460" as="geometry"/>
+                </mxCell>
+                <mxCell id="172" value="EADDRNOTAVAIL - The specified address is not available from the local machine." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="171" vertex="1">
+                    <mxGeometry y="20" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="173" value="EAFNOSUPPORT - The socket cannot connect to an address of the specified type." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="171" vertex="1">
+                    <mxGeometry y="50" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="174" value="EALREADY - The socket is already trying to connect to something." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="171" vertex="1">
+                    <mxGeometry y="80" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="175" value="EBADF - The socket is not valid (i.e, closed)." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="171" vertex="1">
+                    <mxGeometry y="110" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="176" value="ECONNREFUSED - The target refused the connection request." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="171" vertex="1">
+                    <mxGeometry y="130" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="177" value="EINPROGRESS - O_NONBLOCK is set; the connection shall be established asynchronously." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="171" vertex="1">
+                    <mxGeometry y="160" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="178" value="EINTR - The attempt to establish a connection was interrupted by delivery of a caught signal; the connection shall be established asynchronously." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="171" vertex="1">
+                    <mxGeometry y="190" width="320" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="179" value="EISCONN - The socket is already connected." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="171" vertex="1">
+                    <mxGeometry y="240" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="180" value="ENETUNREACH - The network cannot be reached." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="171" vertex="1">
+                    <mxGeometry y="260" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="181" value="ENOTSOCK - Not a valid socket." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="171" vertex="1">
+                    <mxGeometry y="280" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="182" value="EPROTOTYPE - Connecting to the specified address is not supported by SCTP (ex., a broadcast address)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="171" vertex="1">
+                    <mxGeometry y="300" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="183" value="ETIMEDOUT - The attempt to connect timed out before a connection was made." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="171" vertex="1">
+                    <mxGeometry y="330" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="184" value="EHOSTUNREACH - The destination host cannot be reached (either the host is down or a remote router cannot reach it)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="171" vertex="1">
+                    <mxGeometry y="360" width="320" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="185" value="ENOBUFS - No buffer space available for the Stack to make a new association." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="171" vertex="1">
+                    <mxGeometry y="410" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="186" value="EOPNOTSUPP - The socket is in listen mode." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="171" vertex="1">
+                    <mxGeometry y="440" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="193" value="sctp_peeloff(assoc_id) SocketError | PeelError!socket_t" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=20;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="97" vertex="1">
+                    <mxGeometry x="720" y="200" width="320" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="194" value="Item 1" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="193" vertex="1">
+                    <mxGeometry y="20" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="195" value="Item 2" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="193" vertex="1">
+                    <mxGeometry y="50" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="196" value="Item 3" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="193" vertex="1">
+                    <mxGeometry y="80" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="198" value="sctp_peeloffAlloc(allocator, assoc_id) SocketError || PeelError | AllocError!void" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="193" vertex="1">
+                    <mxGeometry y="110" width="320" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="199" value="allocator - The allocator for the Stack to use (if needed)." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="198" vertex="1">
+                    <mxGeometry y="30" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="200" value="PeelError" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="97" vertex="1">
+                    <mxGeometry y="800" width="320" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="201" value="EINVAL - The assoc_id provided is invalid." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="200" vertex="1">
+                    <mxGeometry y="30" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="203" value="ENOTSOCK - The socket provided is invalid." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="200" vertex="1">
+                    <mxGeometry y="50" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="204" value="ECONNABORTED - The connection was aborted while peeling into a new socket." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="200" vertex="1">
+                    <mxGeometry y="70" width="320" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="206" value="EOPNOTSUPP - The socket is in one-to-one mode." style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="200" vertex="1">
+                    <mxGeometry y="100" width="320" height="20" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

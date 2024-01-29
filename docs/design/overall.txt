@@ -1,0 +1,8 @@
+The library should be able to construct an SCTP stack on top of one or more UDP sockets.
+The stack controls the encapsulation sockets directly, with the application directing what
+encapsulation port should be bound for usage. This is so that the stack can bind new addresses
+as necessary during the application's run-time.
+The library MUST implement IETF RFCs 9260, 6951, 3758, 4895, 7496, and 8260. Additional RFCs
+MAY be implemented as required.
+The library MUST provide an implementation of the POSIX Sockets functions as outlined by the
+Open Group Base Specifications Issue 7, 2018 edition, and IETF RFCs 3493, 3542, and 6458.
